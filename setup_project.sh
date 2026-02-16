@@ -31,10 +31,19 @@ trap cleanup_on_interrupt SIGINT
 echo "=== Attendance Tracker Project Setup ==="
 echo ""
 
-# Prompt user for project name
-read -p "Enter Project Name: " USER_INPUT
-PROJECT_NAME="attendance_tracker_${USER_INPUT}"
-PROJECT_DIR="$PROJECT_NAME"
+# Prompt user for project name with directory existence check
+while true; do
+    read -p "Enter Project Name: " USER_INPUT
+    PROJECT_NAME="attendance_tracker_${USER_INPUT}"
+    PROJECT_DIR="$PROJECT_NAME"
+    
+    if [ -d "$PROJECT_DIR" ]; then
+        echo "Error: Directory '$PROJECT_DIR' already exists. Please enter a different name."
+        echo ""
+    else
+        break
+    fi
+done
 
 echo ""
 echo "Creating project: $PROJECT_NAME"
