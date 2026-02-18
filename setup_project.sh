@@ -126,15 +126,32 @@ echo "The directory structure has successfully been created."
 echo ""
 
 # Ask user if they want to update attendance thresholds
-read -p "Do you want to update attendance thresholds? (y/n): " UPDATE_THRESHOLDS
+while true; do
+    read -p "Do you want to update attendance thresholds? (y/n): " UPDATE_THRESHOLDS
+    case $UPDATE_THRESHOLDS in
+        y|Y|n|N) break ;;
+        *) echo "Error: Please enter 'y' or 'n' only." ;;
+    esac
+done
 
 if [ "$UPDATE_THRESHOLDS" = "y" ] || [ "$UPDATE_THRESHOLDS" = "Y" ]; then
-    read -p "Enter Warning threshold (default 75): " WARNING_THRESHOLD
-    read -p "Enter Failure threshold (default 50): " FAILURE_THRESHOLD
+    while true; do
+        read -p "Enter Warning threshold (default 75): " WARNING_THRESHOLD
+        case $WARNING_THRESHOLD in
+            "") WARNING_THRESHOLD=75; break ;;
+            *[!0-9]*) echo "Error: Please enter numbers only." ;;
+            *) break ;;
+        esac
+    done
     
-    # Apply default values if user leaves input empty
-    WARNING_THRESHOLD=${WARNING_THRESHOLD:-75}
-    FAILURE_THRESHOLD=${FAILURE_THRESHOLD:-50}
+    while true; do
+        read -p "Enter Failure threshold (default 50): " FAILURE_THRESHOLD
+        case $FAILURE_THRESHOLD in
+            "") FAILURE_THRESHOLD=50; break ;;
+            *[!0-9]*) echo "Error: Please enter numbers only." ;;
+            *) break ;;
+        esac
+    done
     
     # Update configuration file with new threshold values
     sed -i "s/\"warning\": [0-9]*/\"warning\": $WARNING_THRESHOLD/" "$PROJECT_DIR/Helpers/config.json"
@@ -151,6 +168,7 @@ if command -v python3 &> /dev/null; then
     PYTHON_VERSION=$(python3 --version)
     echo "$PYTHON_VERSION is installed"
 else
+    echo "Running Health Check....."
     echo "WARNING: python3 is not installed on this system"
 fi
 
