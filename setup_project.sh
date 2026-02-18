@@ -145,6 +145,9 @@ fi
 
 echo ""
 echo "=== Environment Validation ==="
+echo ""
+echo "Running health check..."
+
 
 # Verify Python 3 is installed on the system
 if command -v python3 &> /dev/null; then
