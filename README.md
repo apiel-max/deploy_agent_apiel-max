@@ -1,3 +1,4 @@
+**This is my link to run through the video where i have clearly explained how my project works**  https://drive.google.com/file/d/184Chx2k3mHWWXO-sDMXqy8PBp8T0XIKZ/view?usp=sharing
 # Attendance Tracker Project
 
 ## Overview
