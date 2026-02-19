@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Store project name and directory path
+# Store project name and directory path.
 PROJECT_NAME=""
 PROJECT_DIR=""
 
